@@ -80,7 +80,7 @@ const experiences = [
 
 const projects = [
   {
-    title: "Fire Sensing Device",
+    title: "ACCIDENT PREVENTION SYSTEM",
     context: "THIRAN '25 · Technical Symposium",
     sheet: "SHEET 01",
     description:
