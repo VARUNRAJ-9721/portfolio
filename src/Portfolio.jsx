@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import varunImg from "./varun.png"; 
 import {
   FiMail,
   FiPhone,
@@ -562,7 +563,7 @@ export default function Portfolio() {
           {/* Left: photo */}
           <div className="hero-left">
             <div className="hero-image-wrap">
-              <img src="./src/varun.png" alt="Varunraj V" className="hero-image" />
+<img src={varunImg} alt="Varunraj V" className="hero-image" />
             </div>
           </div>
 
