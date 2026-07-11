@@ -116,8 +116,8 @@ const Section = ({ id, eyebrow, title, children }) => {
   return (
     <section id={id} className="mx-auto max-w-6xl px-6" style={{ paddingTop: 80, paddingBottom: 80 }}>
       <div style={{ marginBottom: 44 }}>
-        <div className="mono" style={{ fontSize: 11, letterSpacing: "0.2em", color: C.primary }}>
-          {eyebrow.toUpperCase()}
+        <div className="mono" style={{ fontSize: 11, letterSpacing: "0.2em", color: C.primary, textTransform: "uppercase" }}>
+          {eyebrow}
         </div>
         <h2
           className="disp"
@@ -127,6 +127,7 @@ const Section = ({ id, eyebrow, title, children }) => {
             fontWeight: 700,
             letterSpacing: "-0.01em",
             color: C.white,
+            textTransform: "uppercase",
           }}
         >
           {title}
@@ -159,7 +160,7 @@ const SkillCard = ({ icon, title, children }) => {
         >
           {icon}
         </div>
-        <h3 className="disp" style={{ fontSize: 16, fontWeight: 700, color: C.white }}>
+        <h3 className="disp" style={{ fontSize: 16, fontWeight: 700, color: C.white, textTransform: "uppercase" }}>
           {title}
         </h3>
       </div>
@@ -194,8 +195,8 @@ const ContactCard = ({ icon, label, value, href }) => {
       >
         {icon}
       </div>
-      <div className="mono" style={{ marginTop: 12, fontSize: 10, letterSpacing: "0.1em", color: C.inkFaint }}>
-        {label.toUpperCase()}
+      <div className="mono" style={{ marginTop: 12, fontSize: 10, letterSpacing: "0.1em", color: C.inkFaint, textTransform: "uppercase" }}>
+        {label}
       </div>
       <div style={{ marginTop: 4, fontSize: 13, fontWeight: 600, wordBreak: "break-word", color: C.white }}>
         {value}
@@ -255,14 +256,12 @@ export default function Portfolio() {
       style={{
         background: C.primaryBg,
         color: C.ink,
-        fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
+        fontFamily: "'Cambria', Georgia, serif",
         minHeight: "100vh",
         position: "relative",
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
-
         /* Kill any white flash: overscroll bounce, resize, or unpainted edges
            should always reveal the same dark theme color, never the browser default white. */
         html, body, #root, #__next {
@@ -274,12 +273,14 @@ export default function Portfolio() {
           scroll-behavior: smooth;
           overscroll-behavior-y: none;
         }
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; font-family: 'Cambria', Georgia, serif; }
 
-        .disp { font-family: 'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
-        .mono { font-family: 'Cambria', 'JetBrains Mono', ui-monospace, monospace; }
+        .disp { font-family: 'Cambria', Georgia, serif; }
+        .mono { font-family: 'Cambria', Georgia, serif; }
 
         .accent-text { color: ${C.primary}; }
+
+        h1, h2, h3, h4, h5, h6 { text-transform: uppercase; }
 
         .corner::before, .corner::after {
           content: '';
@@ -401,7 +402,6 @@ export default function Portfolio() {
           background: "rgba(10, 22, 40, 0.75)",
           backdropFilter: "blur(10px)",
           borderBottom: `1px solid ${C.line}`,
-          fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
         }}
       >
         {nav.map((n) => (
@@ -409,7 +409,7 @@ export default function Portfolio() {
             key={n.href}
             href={n.href}
             className={`nav-link mono${activeSection === n.href.slice(1) ? " active" : ""}`}
-            style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, letterSpacing: "0.04em" }}
+            style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, letterSpacing: "0.04em", textTransform: "uppercase" }}
           >
             <span className="nav-dot" style={{ width: 5, height: 5, borderRadius: "50%", background: C.cyan }} />
             {n.label}
@@ -457,7 +457,6 @@ export default function Portfolio() {
             padding: "10px 0",
             minWidth: 190,
             boxShadow: "0 12px 30px rgba(0,0,0,0.45)",
-            fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
           }}
         >
           {nav.map((n) => (
@@ -469,6 +468,7 @@ export default function Portfolio() {
                 display: "block",
                 padding: "10px 18px",
                 fontSize: 13,
+                textTransform: "uppercase",
               }}
             >
               <span style={{ color: C.primary }}>{n.n}</span> {n.label}
@@ -523,7 +523,7 @@ export default function Portfolio() {
             color: "#EAF2FF",
             marginBottom: 28,
             background: "rgba(255,255,255,0.06)",
-            fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+            textTransform: "uppercase",
           }}
         >
           <span
@@ -546,7 +546,6 @@ export default function Portfolio() {
             fontWeight: 700,
             letterSpacing: "0.01em",
             color: C.white,
-            fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif",
           }}
         >
           VARUNRAJ V
@@ -558,7 +557,6 @@ export default function Portfolio() {
             fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
             fontWeight: 500,
             color: "#EAF2FF",
-            fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
           }}
         >
           Mechanical Engineering Student
@@ -570,7 +568,6 @@ export default function Portfolio() {
             marginTop: 8,
             fontSize: 13,
             color: "#C7DBFF",
-            fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
           }}
         >
           B.E. Mechanical Engineering &nbsp;|&nbsp; ACGCET, Karaikudi
@@ -599,7 +596,7 @@ export default function Portfolio() {
               fontWeight: 600,
               color: C.primaryDark,
               background: C.white,
-              fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+              textTransform: "uppercase",
             }}
           >
             <FiMail size={16} /> Contact Me
@@ -618,7 +615,6 @@ export default function Portfolio() {
               color: C.white,
               background: "rgba(255,255,255,0.15)",
               border: "1px solid rgba(255,255,255,0.3)",
-              fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
             }}
           >
             <FiPhone size={16} /> +91-9344877687
@@ -677,7 +673,6 @@ export default function Portfolio() {
                   fontSize: 26,
                   fontWeight: 700,
                   color: C.white,
-                  fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif",
                 }}
               >
                 {s.k}
@@ -689,10 +684,10 @@ export default function Portfolio() {
                   fontSize: 10,
                   color: "#DCE8FF",
                   letterSpacing: "0.03em",
-                  fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+                  textTransform: "uppercase",
                 }}
               >
-                {s.v.toUpperCase()}
+                {s.v}
               </div>
             </div>
           ))}
@@ -715,7 +710,6 @@ export default function Portfolio() {
             lineHeight: 1.8,
             color: C.inkMute,
             textAlign: "center",
-            fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
           }}
         >
           I'm <span style={{ color: C.white, fontWeight: 600 }}>Varunraj V</span> — a Mechanical
@@ -729,7 +723,7 @@ export default function Portfolio() {
       <Section id="about" eyebrow="01 — About" title="Career objective">
         <div className="grid gap-10 md:grid-cols-3">
           <div className="md:col-span-2">
-            <p style={{ fontSize: 17, lineHeight: 1.8, color: C.inkMute, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>
+            <p style={{ fontSize: 17, lineHeight: 1.8, color: C.inkMute }}>
               Aspiring Mechanical Engineer with a strong passion for{" "}
               <span style={{ color: C.white }}>design and manufacturing</span>. Seeking an
               opportunity to apply my engineering knowledge, develop practical skills, and
@@ -752,13 +746,13 @@ export default function Portfolio() {
               >
                 <div className="flex items-start justify-between gap-2">
                   <FaGraduationCap className="h-5 w-5" style={{ color: C.primary }} />
-                  <span className="mono" style={{ fontSize: 10, color: C.inkFaint, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
+                  <span className="mono" style={{ fontSize: 10, color: C.inkFaint }}>
                     {e.year}
                   </span>
                 </div>
-                <div style={{ marginTop: 8, fontSize: 14, fontWeight: 600, color: C.white, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>{e.degree}</div>
-                <div style={{ marginTop: 4, fontSize: 12, color: C.inkMute, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>{e.school}</div>
-                <div className="mono accent-text" style={{ marginTop: 8, fontSize: 13, fontWeight: 600, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
+                <div style={{ marginTop: 8, fontSize: 14, fontWeight: 600, color: C.white }}>{e.degree}</div>
+                <div style={{ marginTop: 4, fontSize: 12, color: C.inkMute }}>{e.school}</div>
+                <div className="mono accent-text" style={{ marginTop: 8, fontSize: 13, fontWeight: 600 }}>
                   {e.score}
                 </div>
               </div>
@@ -768,7 +762,7 @@ export default function Portfolio() {
       </Section>
 
       {/* Experience Section */}
-      <Section id="experience" eyebrow="02 — Experience" title="INTERNSHIP EXPERIENCE">
+      <Section id="experience" eyebrow="02 — Experience" title="Internship experience">
         <div className="space-y-6">
           {experiences.map((exp) => (
             <div
@@ -800,10 +794,10 @@ export default function Portfolio() {
                     <FiBriefcase className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="disp" style={{ fontSize: 20, fontWeight: 700, color: C.white, fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif" }}>
+                    <h3 className="disp" style={{ fontSize: 20, fontWeight: 700, color: C.white }}>
                       {exp.company}
                     </h3>
-                    <div style={{ fontSize: 13, color: C.inkMute, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>
+                    <div style={{ fontSize: 13, color: C.inkMute }}>
                       {exp.role} · {exp.location}
                     </div>
                   </div>
@@ -818,12 +812,12 @@ export default function Portfolio() {
                       padding: "4px 12px",
                       fontSize: 10,
                       color: C.cyan,
-                      fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+                      textTransform: "uppercase",
                     }}
                   >
-                    {exp.tag.toUpperCase()}
+                    {exp.tag}
                   </span>
-                  <span className="mono" style={{ fontSize: 11, color: C.inkFaint, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
+                  <span className="mono" style={{ fontSize: 11, color: C.inkFaint }}>
                     {exp.date}
                   </span>
                 </div>
@@ -845,7 +839,6 @@ export default function Portfolio() {
                       fontSize: 14,
                       lineHeight: 1.6,
                       color: C.inkMute,
-                      fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
                     }}
                   >
                     <span
@@ -893,7 +886,6 @@ export default function Portfolio() {
                     border: `1px solid ${C.line}`,
                     borderRadius: 4,
                     padding: "3px 8px",
-                    fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
                   }}
                 >
                   {p.sheet}
@@ -906,15 +898,15 @@ export default function Portfolio() {
                   fontSize: 11,
                   color: C.inkFaint,
                   letterSpacing: "0.04em",
-                  fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+                  textTransform: "uppercase",
                 }}
               >
-                {p.context.toUpperCase()}
+                {p.context}
               </div>
-              <h3 className="disp" style={{ marginTop: 4, fontSize: 24, fontWeight: 700, color: C.white, fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif" }}>
+              <h3 className="disp" style={{ marginTop: 4, fontSize: 24, fontWeight: 700, color: C.white }}>
                 {p.title}
               </h3>
-              <p style={{ marginTop: 12, fontSize: 14, lineHeight: 1.7, color: C.inkMute, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>{p.description}</p>
+              <p style={{ marginTop: 12, fontSize: 14, lineHeight: 1.7, color: C.inkMute }}>{p.description}</p>
               <div style={{ marginTop: 20, display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {p.tags.map((t) => (
                   <span
@@ -927,7 +919,6 @@ export default function Portfolio() {
                       padding: "5px 10px",
                       fontSize: 11,
                       color: C.inkMute,
-                      fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
                     }}
                   >
                     {t}
@@ -956,7 +947,6 @@ export default function Portfolio() {
                     fontSize: 12,
                     fontWeight: 500,
                     color: C.inkMute,
-                    fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
                   }}
                 >
                   {s}
@@ -974,7 +964,6 @@ export default function Portfolio() {
                     gap: 10,
                     fontSize: 13,
                     lineHeight: 1.6,
-                    fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
                   }}
                 >
                   <span style={{ color: C.cyan, marginTop: 1 }}>✓</span>
@@ -992,7 +981,6 @@ export default function Portfolio() {
                     display: "flex",
                     gap: 10,
                     fontSize: 13,
-                    fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
                   }}
                 >
                   <span style={{ color: C.primary }}>◆</span>
@@ -1032,7 +1020,7 @@ export default function Portfolio() {
               >
                 <FaTrophy className="h-5 w-5" />
               </div>
-              <h3 className="disp" style={{ fontSize: 19, fontWeight: 700, color: C.white, fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif" }}>
+              <h3 className="disp" style={{ fontSize: 19, fontWeight: 700, color: C.white }}>
                 Achievements
               </h3>
             </div>
@@ -1046,7 +1034,6 @@ export default function Portfolio() {
                     fontSize: 13,
                     color: C.inkMute,
                     lineHeight: 1.6,
-                    fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
                   }}
                 >
                   <span style={{ color: C.cyan }}>▹</span>
@@ -1080,7 +1067,7 @@ export default function Portfolio() {
               >
                 <FiUsers className="h-5 w-5" />
               </div>
-              <h3 className="disp" style={{ fontSize: 19, fontWeight: 700, color: C.white, fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif" }}>
+              <h3 className="disp" style={{ fontSize: 19, fontWeight: 700, color: C.white }}>
                 Leadership
               </h3>
             </div>
@@ -1093,9 +1080,9 @@ export default function Portfolio() {
                     paddingLeft: 14,
                   }}
                 >
-                  <div style={{ fontSize: 13, fontWeight: 600, color: C.white, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>{l.role}</div>
-                  <div style={{ fontSize: 12, color: C.inkMute, fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif" }}>{l.org}</div>
-                  <div className="mono" style={{ marginTop: 2, fontSize: 11, color: C.cyan, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: C.white }}>{l.role}</div>
+                  <div style={{ fontSize: 12, color: C.inkMute }}>{l.org}</div>
+                  <div className="mono" style={{ marginTop: 2, fontSize: 11, color: C.cyan }}>
                     {l.period}
                   </div>
                 </li>
@@ -1108,8 +1095,8 @@ export default function Portfolio() {
       {/* Contact Section */}
       <section id="contact" style={{ position: "relative", padding: "96px 0", background: C.primaryBg }}>
         <div className="relative mx-auto max-w-4xl px-6 text-center">
-          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.2em", color: C.primary, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
-            06 — LET'S CONNECT
+          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.2em", color: C.primary, textTransform: "uppercase" }}>
+            06 — Let's connect
           </div>
           <h2
             className="disp"
@@ -1119,7 +1106,6 @@ export default function Portfolio() {
               fontWeight: 700,
               letterSpacing: "-0.01em",
               color: C.white,
-              fontFamily: "'Cambria', 'Space Grotesk', ui-sans-serif, system-ui, sans-serif",
             }}
           >
             Ready to design and build for your <span className="accent-text">next project.</span>
@@ -1131,7 +1117,6 @@ export default function Portfolio() {
               fontSize: 15,
               color: C.inkMute,
               lineHeight: 1.7,
-              fontFamily: "'Cambria', 'Inter', ui-sans-serif, system-ui, sans-serif",
             }}
           >
             Actively seeking internships and opportunities in design and manufacturing. Reach out
@@ -1162,10 +1147,10 @@ export default function Portfolio() {
               gap: 8,
               color: C.primary,
               fontSize: 12,
-              fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace",
+              textTransform: "uppercase",
             }}
           >
-            <FiLinkedin className="h-4 w-4" /> LINKEDIN PROFILE
+            <FiLinkedin className="h-4 w-4" /> LinkedIn profile
           </a>
         </div>
       </section>
@@ -1173,11 +1158,11 @@ export default function Portfolio() {
       {/* Footer */}
       <footer style={{ borderTop: `1px solid ${C.line}`, padding: "28px 0", background: C.primaryBgLight }}>
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center md:flex-row md:text-left">
-          <div className="mono" style={{ fontSize: 11, color: C.inkFaint, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
-            © 2026 VARUNRAJ V — ALL RIGHTS RESERVED
+          <div className="mono" style={{ fontSize: 11, color: C.inkFaint, textTransform: "uppercase" }}>
+            © 2026 Varunraj V — All rights reserved
           </div>
-          <div className="mono" style={{ fontSize: 11, color: C.inkFaint, fontFamily: "'Cambria', 'JetBrains Mono', ui-monospace, monospace" }}>
-            MECHANICAL ENGINEERING · ACGCET KARAIKUDI
+          <div className="mono" style={{ fontSize: 11, color: C.inkFaint, textTransform: "uppercase" }}>
+            Mechanical engineering · ACGCET Karaikudi
           </div>
         </div>
       </footer>
