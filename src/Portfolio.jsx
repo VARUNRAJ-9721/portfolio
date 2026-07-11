@@ -331,6 +331,59 @@ export default function Portfolio() {
           color: ${C.white};
         }
 
+        /* Hero two-column layout */
+        .hero-grid {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          align-items: center;
+          gap: 56px;
+          width: 100%;
+        }
+        .hero-left {
+          flex: 0 0 34%;
+          display: flex;
+          justify-content: center;
+        }
+        .hero-image-wrap {
+          width: 100%;
+          max-width: 320px;
+          aspect-ratio: 1 / 1;
+          border-radius: 20px;
+          overflow: hidden;
+          border: 1px solid rgba(255,255,255,0.25);
+          background: rgba(255,255,255,0.08);
+          box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5);
+        }
+        .hero-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+        .hero-right {
+          flex: 1 1 60%;
+          text-align: left;
+        }
+        .hero-actions { justify-content: flex-start; }
+        .hero-stats { margin-left: 0; }
+
+        @media (max-width: 900px) {
+          .hero-grid {
+            flex-direction: column;
+            text-align: center;
+            gap: 32px;
+          }
+          .hero-left { flex: 0 0 auto; }
+          .hero-image-wrap { max-width: 220px; }
+          .hero-right { text-align: center; }
+          .hero-actions { justify-content: center; }
+          .hero-stats { margin: 56px auto 0; }
+        }
+        @media (max-width: 480px) {
+          .hero-image-wrap { max-width: 170px; }
+        }
+
         /* Responsive Grid Classes */
         .grid { display: grid; gap: 1.5rem; }
         .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
@@ -485,10 +538,7 @@ export default function Portfolio() {
           background: `linear-gradient(135deg, ${C.primaryDark} 0%, ${C.primary} 100%)`,
           minHeight: "88vh",
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
           padding: "80px 24px",
           overflow: "hidden",
         }}
@@ -508,189 +558,202 @@ export default function Portfolio() {
           }}
         />
 
-        <div
-          className="mono"
-          style={{
-            position: "relative",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            border: "1px solid rgba(255,255,255,0.28)",
-            borderRadius: 999,
-            padding: "7px 16px",
-            fontSize: 11,
-            letterSpacing: "0.06em",
-            color: "#EAF2FF",
-            marginBottom: 28,
-            background: "rgba(255,255,255,0.06)",
-            textTransform: "uppercase",
-          }}
-        >
-          <span
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: "#7CF29C",
-              boxShadow: "0 0 0 3px rgba(124, 242, 156, 0.25)",
-            }}
-          />
-          OPEN TO DESIGN &amp; MANUFACTURING ROLES · GRAD 2027
-        </div>
+        <div className="hero-grid mx-auto max-w-6xl">
+          {/* Left: photo */}
+          <div className="hero-left">
+            <div className="hero-image-wrap">
+              <img src="varun.jpeg" alt="Varunraj V" className="hero-image" />
+            </div>
+          </div>
 
-        <h1
-          className="disp"
-          style={{
-            position: "relative",
-            fontSize: "clamp(2.2rem, 6vw, 3.6rem)",
-            fontWeight: 700,
-            letterSpacing: "0.01em",
-            color: C.white,
-          }}
-        >
-          VARUNRAJ V
-        </h1>
-        <p
-          style={{
-            position: "relative",
-            marginTop: 14,
-            fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
-            fontWeight: 500,
-            color: "#EAF2FF",
-          }}
-        >
-          Mechanical Engineering Student
-        </p>
-        <p
-          className="mono"
-          style={{
-            position: "relative",
-            marginTop: 8,
-            fontSize: 13,
-            color: "#C7DBFF",
-          }}
-        >
-          B.E. Mechanical Engineering &nbsp;|&nbsp; ACGCET, Karaikudi
-        </p>
-
-        <div
-          style={{
-            position: "relative",
-            marginTop: 36,
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 12,
-            justifyContent: "center",
-          }}
-        >
-          <a
-            href="#contact"
-            className="mono"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              borderRadius: 8,
-              padding: "12px 22px",
-              fontSize: 13,
-              fontWeight: 600,
-              color: C.primaryDark,
-              background: C.white,
-              textTransform: "uppercase",
-            }}
-          >
-            <FiMail size={16} /> Contact Me
-          </a>
-          <a
-            href="tel:+919344877687"
-            className="mono"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              borderRadius: 8,
-              padding: "12px 22px",
-              fontSize: 13,
-              fontWeight: 600,
-              color: C.white,
-              background: "rgba(255,255,255,0.15)",
-              border: "1px solid rgba(255,255,255,0.3)",
-            }}
-          >
-            <FiPhone size={16} /> +91-9344877687
-          </a>
-        </div>
-
-        <a
-          href="https://www.linkedin.com/in/varunraj-v-5263b02a6?utm_source=share_via&utm_content=profile&utm_medium=member_android"
-          aria-label="LinkedIn profile"
-          style={{
-            position: "relative",
-            marginTop: 32,
-            display: "inline-flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 40,
-            height: 40,
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.12)",
-            color: C.white,
-          }}
-        >
-          <FiLinkedin size={19} />
-        </a>
-
-        <div
-          style={{
-            position: "relative",
-            marginTop: 56,
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: 16,
-            width: "100%",
-            maxWidth: 640,
-          }}
-          className="md:grid-cols-4"
-        >
-          {[
-            { k: "2", v: "Internships" },
-            { k: "8.42", v: "B.E. CGPA" },
-            { k: "83.5%", v: "12TH HSC score" },
-            { k: "6", v: "CAD / CAE tools" },
-          ].map((s) => (
+          {/* Right: text content */}
+          <div className="hero-right">
             <div
-              key={s.v}
+              className="mono"
               style={{
-                border: "1px solid rgba(255,255,255,0.2)",
-                borderRadius: 10,
-                padding: 16,
-                background: "rgba(255,255,255,0.08)",
+                position: "relative",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                border: "1px solid rgba(255,255,255,0.28)",
+                borderRadius: 999,
+                padding: "7px 16px",
+                fontSize: 11,
+                letterSpacing: "0.06em",
+                color: "#EAF2FF",
+                marginBottom: 28,
+                background: "rgba(255,255,255,0.06)",
+                textTransform: "uppercase",
               }}
             >
-              <div
-                className="disp"
+              <span
                 style={{
-                  fontSize: 26,
-                  fontWeight: 700,
-                  color: C.white,
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "#7CF29C",
+                  boxShadow: "0 0 0 3px rgba(124, 242, 156, 0.25)",
                 }}
-              >
-                {s.k}
-              </div>
-              <div
+              />
+              OPEN TO DESIGN &amp; MANUFACTURING ROLES · GRAD 2027
+            </div>
+
+            <h1
+              className="disp"
+              style={{
+                position: "relative",
+                fontSize: "clamp(2.2rem, 6vw, 3.6rem)",
+                fontWeight: 700,
+                letterSpacing: "0.01em",
+                color: C.white,
+              }}
+            >
+              VARUNRAJ V
+            </h1>
+            <p
+              style={{
+                position: "relative",
+                marginTop: 14,
+                fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
+                fontWeight: 500,
+                color: "#EAF2FF",
+              }}
+            >
+              Mechanical Engineering Student
+            </p>
+            <p
+              className="mono"
+              style={{
+                position: "relative",
+                marginTop: 8,
+                fontSize: 13,
+                color: "#C7DBFF",
+              }}
+            >
+              B.E. Mechanical Engineering &nbsp;|&nbsp; ACGCET, Karaikudi
+            </p>
+
+            <div
+              className="hero-actions"
+              style={{
+                position: "relative",
+                marginTop: 36,
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 12,
+              }}
+            >
+              <a
+                href="#contact"
                 className="mono"
                 style={{
-                  marginTop: 4,
-                  fontSize: 10,
-                  color: "#DCE8FF",
-                  letterSpacing: "0.03em",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  borderRadius: 8,
+                  padding: "12px 22px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: C.primaryDark,
+                  background: C.white,
                   textTransform: "uppercase",
                 }}
               >
-                {s.v}
-              </div>
+                <FiMail size={16} /> Contact Me
+              </a>
+              <a
+                href="tel:+919344877687"
+                className="mono"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  borderRadius: 8,
+                  padding: "12px 22px",
+                  fontSize: 13,
+                  fontWeight: 600,
+                  color: C.white,
+                  background: "rgba(255,255,255,0.15)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                }}
+              >
+                <FiPhone size={16} /> +91-9344877687
+              </a>
             </div>
-          ))}
+
+            <a
+              href="#"
+              aria-label="LinkedIn profile"
+              className="hero-linkedin"
+              style={{
+                position: "relative",
+                marginTop: 32,
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 40,
+                height: 40,
+                borderRadius: "50%",
+                background: "rgba(255,255,255,0.12)",
+                color: C.white,
+              }}
+            >
+              <FiLinkedin size={19} />
+            </a>
+
+            <div
+              className="hero-stats md:grid-cols-4"
+              style={{
+                position: "relative",
+                marginTop: 56,
+                display: "grid",
+                gridTemplateColumns: "repeat(2, 1fr)",
+                gap: 16,
+                width: "100%",
+                maxWidth: 640,
+              }}
+            >
+              {[
+                { k: "2", v: "Internships" },
+                { k: "8.42", v: "B.E. CGPA" },
+                { k: "100%", v: "SSLC score" },
+                { k: "6", v: "CAD / CAE tools" },
+              ].map((s) => (
+                <div
+                  key={s.v}
+                  style={{
+                    border: "1px solid rgba(255,255,255,0.2)",
+                    borderRadius: 10,
+                    padding: 16,
+                    background: "rgba(255,255,255,0.08)",
+                  }}
+                >
+                  <div
+                    className="disp"
+                    style={{
+                      fontSize: 26,
+                      fontWeight: 700,
+                      color: C.white,
+                    }}
+                  >
+                    {s.k}
+                  </div>
+                  <div
+                    className="mono"
+                    style={{
+                      marginTop: 4,
+                      fontSize: 10,
+                      color: "#DCE8FF",
+                      letterSpacing: "0.03em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {s.v}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
