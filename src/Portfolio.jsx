@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import varunImg from "./varun.png"; 
+import varunImg from "./varun.jpeg"; 
 import {
   FiMail,
   FiPhone,
