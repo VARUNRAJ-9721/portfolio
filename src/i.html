@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Varunraj V · Mechanical Engineer</title>
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- React Icons are embedded via the component, but we keep CDN for fallback if needed -->
+  <style>
+    /* base resets & blueprint grid */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0A1830; color: #EAF2FF; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+    a { color: inherit; text-decoration: none; }
+    .disp { font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+    .blueprint-grid {
+      background-image: linear-gradient(#152F55 1px, transparent 1px),
+                        linear-gradient(90deg, #152F55 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .accent-text { color: #3B82F6; }
+    .corner { position: relative; }
+    .corner::before, .corner::after {
+      content: ''; position: absolute; width: 14px; height: 14px;
+      border-color: #3B82F6; opacity: 0.8;
+    }
+    .corner::before { top: -1px; left: -1px; border-top: 2px solid; border-left: 2px solid; }
+    .corner::after { bottom: -1px; right: -1px; border-bottom: 2px solid; border-right: 2px solid; }
+    .card-hover { transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+    .card-hover:hover { transform: translateY(-3px); border-color: #3B82F680 !important; box-shadow: 0 12px 40px -12px rgba(59,130,246,0.35); }
+    ::selection { background: #3B82F655; color: #EAF2FF; }
+
+    /* responsive grid helpers */
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-10 { gap: 2.5rem; }
+    .flex { display: flex; }
+    .flex-wrap { flex-wrap: wrap; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .flex-col { flex-direction: column; }
+    .text-center { text-align: center; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .max-w-6xl { max-width: 72rem; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-2xl { max-width: 42rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .w-full { width: 100%; }
+
+    /* mobile first */
+    @media (max-width: 640px) {
+      .grid-cols-2 { grid-template-columns: 1fr; }
+      .grid-cols-3 { grid-template-columns: 1fr; }
+      .md\:grid-cols-4 { grid-template-columns: 1fr 1fr; }
+      .md\:grid-cols-3 { grid-template-columns: 1fr; }
+      .md\:grid-cols-2 { grid-template-columns: 1fr; }
+      .md\:col-span-2 { grid-column: span 1; }
+    }
+    @media (min-width: 641px) and (max-width: 1024px) {
+      .md\:grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+<div id="root"></div>
+<!-- React + ReactDOM + Icons from CDN (to keep it self-contained) -->
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-icons@5.3.0/fi.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-icons@5.3.0/fa.js"></script>
+<script>
+  // Destructure icons from global ReactIcons (they register themselves)
+  const { FiMail, FiPhone, FiMapPin, FiAward, FiBriefcase, FiTool, FiCpu, FiUsers, FiMenu, FiX, FiLinkedin } = ReactIcons.Fi;
+  const { FaGraduationCap, FaTrophy } = ReactIcons.Fa;
+
+  // ----- Tokens (blue & white theme, blueprint) -----
+  const C = {
+    bg: "#0A1830",
+    bgPanel: "#0D2043",
+    bgPanelSoft: "#0F274C",
+    line: "#1E3E68",
+    lineSoft: "#152F55",
+    blue: "#3B82F6",
+    heroBlue: "#1D4ED8",
+    cyan: "#60A5FA",
+    ink: "#EAF2FF",
+    inkMute: "#8AA3C9",
+    inkFaint: "#5C7699",
+    white: "#FFFFFF",
+  };
+
+  const nav = [
+    { href: "#about", label: "About", n: "01" },
+    { href: "#experience", label: "Experience", n: "02" },
+    { href: "#projects", label: "Projects", n: "03" },
+    { href: "#skills", label: "Skills", n: "04" },
+    { href: "#contact", label: "Contact", n: "05" },
+  ];
+
+  const experiences = [
+    {
+      company: "BHEL",
+      role: "Intern — Heavy Engineering",
+      location: "Tiruchirappalli",
+      date: "June 2026",
+      tag: "Manufacturing",
+      points: [
+        "Gained hands-on exposure to conventional and CNC machining operations.",
+        "Learned welding, fabrication, and quality inspection techniques used in heavy engineering.",
+        "Developed practical knowledge of manufacturing processes, quality inspection, and industrial safety practices.",
+      ],
+    },
+    {
+      company: "NLC India Ltd.",
+      role: "Intern — Mobile Transfer Conveyor",
+      location: "Neyveli",
+      date: "June 2025",
+      tag: "Mining Equipment",
+      points: [
+        "Conducted a case study on frequent failures of the cable winding machine in the Mobile Transfer Conveyor (MTC) at NLC Neyveli.",
+        "Analyzed root causes of mechanical and electrical failures and evaluated preventive maintenance to improve equipment reliability.",
+        "Proposed corrective measures to reduce downtime, enhance operational efficiency, and improve machine availability.",
+      ],
+    },
+  ];
+
+  const projects = [
+    {
+      title: "Fire Sensing Device",
+      context: "THIRAN '25 · Technical Symposium",
+      sheet: "SHEET 01",
+      description:
+        "An accident-prevention system that detects driver drowsiness and activates alert mechanisms — engineered to cut down night-time accidents caused by fatigue at the wheel.",
+      tags: ["Safety", "Sensors", "Automotive", "Embedded"],
+    },
+  ];
+
+  const technicalSkills = ["SolidWorks", "CREO", "CATIA", "AutoCAD", "Ansys Workbench", "MS Office Suite"];
+  const certifications = ["SolidWorks & CATIA Training — TVS Training Services Ltd."];
+  const softSkills = ["Team Leadership", "Problem-Solving", "Project Management", "Teamwork"];
+
+  const achievements = [
+    "Winner — Craft It, Intra College Symposium, ACGCET",
+    "Runner-up — AutoCAD Drawing Competition, Intra College Symposium, ACGCET",
+  ];
+
+  const leadership = [
+    { role: "Class Representative", org: "ACGCET, Karaikudi", period: "2023 – Present" },
+    { role: "Vice President", org: "SDG Club of ACGCET", period: "2025 – 2026" },
+    { role: "Chief Designer", org: "Mechanical Association of ACGCET", period: "2026 – 2027" },
+    { role: "Chief Designer", org: "LEO Club of ACGCET", period: "2024 – 2026" },
+    { role: "Member", org: "ISTE Club of ACGCET", period: "2024 – 2026" },
+  ];
+
+  const education = [
+    { degree: "B.E., Mechanical Engineering", school: "ACGCET, Karaikudi", score: "CGPA 8.42", year: "Expected 2027" },
+    { degree: "HSC", school: "Little Flower Hr. Sec. School, Kumbakonam", score: "83.5%", year: "2023" },
+    { degree: "SSLC", school: "Little Flower Hr. Sec. School, Kumbakonam", score: "100%", year: "2021" },
+  ];
+
+  // ----- components (using React.createElement) -----
+  const { useState, useEffect } = React;
+
+  const Section = ({ id, eyebrow, title, children }) => {
+    return React.createElement('section', {
+      id,
+      className: "mx-auto max-w-6xl px-6",
+      style: { paddingTop: 80, paddingBottom: 80 }
+    }, [
+      React.createElement('div', { style: { marginBottom: 44 }, key: 'head' }, [
+        React.createElement('div', { className: 'mono', style: { fontSize: 11, letterSpacing: '0.2em', color: C.blue }, key: 'eye' },
+          eyebrow.toUpperCase()
+        ),
+        React.createElement('h2', { className: 'disp', style: { marginTop: 10, fontSize: 'clamp(1.7rem, 4vw, 2.6rem)', fontWeight: 700, letterSpacing: '-0.01em' }, key: 'title' },
+          title
+        )
+      ]),
+      children
+    ]);
+  };
+
+  const SkillCard = ({ icon, title, children }) => {
+    return React.createElement('div', {
+      style: { border: `1px solid ${C.line}`, borderRadius: 6, padding: 24, background: C.bgPanel }
+    }, [
+      React.createElement('div', { className: 'flex items-center gap-3', style: { marginBottom: 18 }, key: 'header' }, [
+        React.createElement('div', {
+          style: {
+            display: 'flex', height: 38, width: 38, alignItems: 'center', justifyContent: 'center',
+            borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: C.blue
+          },
+          key: 'icon'
+        }, icon),
+        React.createElement('h3', { className: 'disp', style: { fontSize: 16, fontWeight: 700 }, key: 'title' }, title)
+      ]),
+      children
+    ]);
+  };
+
+  const ContactCard = ({ icon, label, value, href }) => {
+    const style = {
+      display: 'block',
+      borderRadius: 6,
+      border: `1px solid ${C.line}`,
+      background: C.bgPanel,
+      padding: 22,
+      textAlign: 'center',
+      transition: 'transform .2s ease, border-color .2s ease'
+    };
+    const inner = [
+      React.createElement('div', {
+        style: {
+          margin: '0 auto', display: 'flex', height: 38, width: 38,
+          alignItems: 'center', justifyContent: 'center',
+          borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: C.blue
+        },
+        key: 'icon'
+      }, icon),
+      React.createElement('div', { className: 'mono', style: { marginTop: 12, fontSize: 10, letterSpacing: '0.1em', color: C.inkFaint }, key: 'label' },
+        label.toUpperCase()
+      ),
+      React.createElement('div', { style: { marginTop: 4, fontSize: 13, fontWeight: 600, wordBreak: 'break-word' }, key: 'value' }, value)
+    ];
+    if (href) {
+      return React.createElement('a', { href, className: 'card-hover', style }, inner);
+    }
+    return React.createElement('div', { style }, inner);
+  };
+
+  // ----- main component -----
+  const Portfolio = () => {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    useEffect(() => {
+      const handler = (e) => {
+        const link = e.target.closest && e.target.closest("a[href^='#']");
+        if (!link) return;
+        const id = link.getAttribute("href");
+        if (!id || id === "#") return;
+        const el = document.querySelector(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          setMenuOpen(false);
+        }
+      };
+      document.addEventListener("click", handler);
+      return () => document.removeEventListener("click", handler);
+    }, []);
+
+    return React.createElement('div', {
+      style: {
+        background: C.bg,
+        color: C.ink,
+        fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif",
+        minHeight: "100vh",
+        position: "relative"
+      }
+    }, [
+      // global grid
+      React.createElement('div', {
+        className: 'blueprint-grid',
+        style: { position: 'fixed', inset: 0, opacity: 0.5, pointerEvents: 'none' },
+        key: 'grid'
+      }),
+      // menu button
+      React.createElement('button', {
+        onClick: () => setMenuOpen(v => !v),
+        'aria-label': 'Toggle menu',
+        style: {
+          position: 'fixed', top: 20, left: 20, zIndex: 50,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          width: 42, height: 42, borderRadius: 8, border: 'none',
+          background: 'rgba(255,255,255,0.15)', color: '#FFFFFF', cursor: 'pointer'
+        },
+        key: 'menuBtn'
+      }, menuOpen ? React.createElement(FiX, { size: 20 }) : React.createElement(FiMenu, { size: 20 })),
+      // mobile menu
+      menuOpen && React.createElement('div', {
+        style: {
+          position: 'fixed', top: 72, left: 20, zIndex: 50,
+          borderRadius: 8, border: `1px solid ${C.line}`,
+          background: C.bgPanel, padding: '10px 0', minWidth: 180,
+          boxShadow: '0 12px 30px rgba(0,0,0,0.35)'
+        },
+        key: 'menu'
+      }, nav.map(n => React.createElement('a', {
+        key: n.href, href: n.href, className: 'mono',
+        style: { display: 'block', padding: '10px 18px', fontSize: 13, color: C.inkMute }
+      }, [
+        React.createElement('span', { style: { color: C.blue }, key: 'n' }, n.n),
+        ' ' + n.label
+      ]))),
+      // Hero
+      React.createElement('section', {
+        id: 'top',
+        style: {
+          position: 'relative', background: C.heroBlue,
+          minHeight: '88vh', display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
+          textAlign: 'center', padding: '80px 24px'
+        },
+        key: 'hero'
+      }, [
+        React.createElement('div', {
+          className: 'mono',
+          style: {
+            display: 'inline-flex', alignItems: 'center', gap: 8,
+            border: '1px solid rgba(255,255,255,0.25)', borderRadius: 999,
+            padding: '6px 14px', fontSize: 11, color: '#DCE8FF', marginBottom: 28
+          },
+          key: 'badge'
+        }, [
+          React.createElement('span', { style: { width: 6, height: 6, borderRadius: '50%', background: '#FFFFFF' }, key: 'dot' }),
+          'OPEN TO DESIGN & MANUFACTURING ROLES · GRAD 2027'
+        ]),
+        React.createElement('h1', { className: 'disp', style: { fontSize: 'clamp(2.2rem, 6vw, 3.6rem)', fontWeight: 700, letterSpacing: '0.01em', color: '#FFFFFF' }, key: 'name' },
+          'VARUNRAJ V'
+        ),
+        React.createElement('p', { style: { marginTop: 14, fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)', fontWeight: 500, color: '#EAF2FF' }, key: 'tag' },
+          'Mechanical Engineering Student'
+        ),
+        React.createElement('p', { className: 'mono', style: { marginTop: 8, fontSize: 13, color: '#C7DBFF' }, key: 'sub' },
+          'B.E. Mechanical Engineering | ACGCET, Karaikudi'
+        ),
+        React.createElement('div', { style: { marginTop: 36, display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center' }, key: 'cta' }, [
+          React.createElement('a', {
+            href: '#contact', className: 'mono',
+            style: {
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              borderRadius: 8, padding: '12px 22px', fontSize: 13, fontWeight: 600,
+              color: C.heroBlue, background: '#FFFFFF'
+            },
+            key: 'contactBtn'
+          }, [React.createElement(FiMail, { size: 16 }, null), ' Contact Me']),
+          React.createElement('a', {
+            href: 'tel:+919344877687', className: 'mono',
+            style: {
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              borderRadius: 8, padding: '12px 22px', fontSize: 13, fontWeight: 600,
+              color: '#FFFFFF', background: 'rgba(255,255,255,0.15)'
+            },
+            key: 'phoneBtn'
+          }, [React.createElement(FiPhone, { size: 16 }, null), ' +91-9344877687'])
+        ]),
+        React.createElement('a', {
+          href: '#', 'aria-label': 'LinkedIn profile',
+          style: { marginTop: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#FFFFFF' },
+          key: 'linkedin'
+        }, React.createElement(FiLinkedin, { size: 22 })),
+        React.createElement('div', {
+          style: { marginTop: 56, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, width: '100%', maxWidth: 640 },
+          className: 'md:grid-cols-4',
+          key: 'stats'
+        }, [
+          { k: '2', v: 'Internships' },
+          { k: '8.42', v: 'B.E. CGPA' },
+          { k: '100%', v: 'SSLC score' },
+          { k: '6', v: 'CAD / CAE tools' }
+        ].map(s => React.createElement('div', {
+          key: s.v,
+          style: { border: '1px solid rgba(255,255,255,0.2)', borderRadius: 8, padding: 16, background: 'rgba(255,255,255,0.08)' }
+        }, [
+          React.createElement('div', { className: 'disp', style: { fontSize: 26, fontWeight: 700, color: '#FFFFFF' } }, s.k),
+          React.createElement('div', { className: 'mono', style: { marginTop: 4, fontSize: 10, color: '#DCE8FF', letterSpacing: '0.03em' } }, s.v.toUpperCase())
+        ])))
+      ]),
+      // Career intro strip
+      React.createElement('section', {
+        style: { borderBottom: `1px solid ${C.line}`, padding: '40px 24px' },
+        key: 'intro'
+      }, React.createElement('p', {
+        className: 'mx-auto',
+        style: { maxWidth: 720, fontSize: 15, lineHeight: 1.8, color: C.inkMute, textAlign: 'center' }
+      }, [
+        "I'm ", React.createElement('span', { style: { color: C.ink, fontWeight: 600 } }, 'Varunraj V'),
+        ' — a Mechanical Engineering student at ACGCET, Karaikudi with a strong passion for design and manufacturing. Hands-on with CAD tools like SolidWorks, CREO and CATIA, with internship experience at BHEL and NLC.'
+      ])),
+      // About
+      React.createElement(Section, { id: 'about', eyebrow: '01 — About', title: 'Career objective', key: 'about' },
+        React.createElement('div', { className: 'grid gap-10 md:grid-cols-3' }, [
+          React.createElement('div', { className: 'md:col-span-2', key: 'text' },
+            React.createElement('p', { style: { fontSize: 17, lineHeight: 1.8, color: C.inkMute } }, [
+              'Aspiring Mechanical Engineer with a strong passion for ',
+              React.createElement('span', { style: { color: C.ink } }, 'design and manufacturing'),
+              '. Seeking an opportunity to apply my engineering knowledge, develop practical skills, and contribute to the design of innovative products and efficient manufacturing processes. Eager to learn new technologies, work collaboratively, and support the organization\'s growth through continuous improvement.'
+            ])
+          ),
+          React.createElement('div', { className: 'space-y-3', key: 'edu' },
+            education.map(e => React.createElement('div', {
+              key: e.degree,
+              style: { border: `1px solid ${C.line}`, borderRadius: 6, padding: 16, background: C.bgPanel }
+            }, [
+              React.createElement('div', { className: 'flex items-start justify-between gap-2' }, [
+                React.createElement(FaGraduationCap, { className: 'h-5 w-5', style: { color: C.blue } }),
+                React.createElement('span', { className: 'mono', style: { fontSize: 10, color: C.inkFaint } }, e.year)
+              ]),
+              React.createElement('div', { style: { marginTop: 8, fontSize: 14, fontWeight: 600 } }, e.degree),
+              React.createElement('div', { style: { marginTop: 4, fontSize: 12, color: C.inkMute } }, e.school),
+              React.createElement('div', { className: 'mono accent-text', style: { marginTop: 8, fontSize: 13, fontWeight: 600 } }, e.score)
+            ]))
+          )
+        ])
+      ),
+      // Experience
+      React.createElement(Section, { id: 'experience', eyebrow: '02 — Experience', title: 'Where I\'ve worked', key: 'exp' },
+        React.createElement('div', { className: 'space-y-6' },
+          experiences.map(exp => React.createElement('div', {
+            key: exp.company,
+            className: 'corner card-hover',
+            style: { position: 'relative', border: `1px solid ${C.line}`, borderRadius: 6, padding: 28, background: C.bgPanel }
+          }, [
+            React.createElement('div', { className: 'flex flex-wrap items-start justify-between gap-4', key: 'header' }, [
+              React.createElement('div', { className: 'flex items-center gap-3' }, [
+                React.createElement('div', {
+                  style: {
+                    display: 'flex', height: 42, width: 42, alignItems: 'center', justifyContent: 'center',
+                    borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: C.blue
+                  }
+                }, React.createElement(FiBriefcase, { className: 'h-5 w-5' })),
+                React.createElement('div', null, [
+                  React.createElement('h3', { className: 'disp', style: { fontSize: 20, fontWeight: 700 } }, exp.company),
+                  React.createElement('div', { style: { fontSize: 13, color: C.inkMute } }, `${exp.role} · ${exp.location}`)
+                ])
+              ]),
+              React.createElement('div', { className: 'flex flex-col items-end gap-2' }, [
+                React.createElement('span', {
+                  className: 'mono',
+                  style: {
+                    borderRadius: 999, border: `1px solid ${C.blue}55`, background: 'rgba(59,130,246,0.1)',
+                    padding: '4px 12px', fontSize: 10, color: C.cyan
+                  }
+                }, exp.tag.toUpperCase()),
+                React.createElement('span', { className: 'mono', style: { fontSize: 11, color: C.inkFaint } }, exp.date)
+              ])
+            ]),
+            React.createElement('ul', {
+              style: { marginTop: 20, borderTop: `1px solid ${C.line}`, paddingTop: 20 },
+              className: 'space-y-3',
+              key: 'points'
+            }, exp.points.map(p => React.createElement('li', {
+              key: p,
+              style: { display: 'flex', gap: 12, fontSize: 14, lineHeight: 1.6, color: C.inkMute }
+            }, [
+              React.createElement('span', { style: { marginTop: 8, height: 4, width: 4, flexShrink: 0, borderRadius: '50%', background: C.blue } }),
+              React.createElement('span', null, p)
+            ])))
+          ]))
+        )
+      ),
+      // Projects
+      React.createElement(Section, { id: 'projects', eyebrow: '03 — Projects', title: 'Things I\'ve built', key: 'proj' },
+        React.createElement('div', { className: 'grid gap-6 md:grid-cols-2' },
+          projects.map(p => React.createElement('div', {
+            key: p.title,
+            className: 'corner card-hover',
+            style: { position: 'relative', overflow: 'hidden', border: `1px solid ${C.line}`, borderRadius: 6, padding: 28, background: C.bgPanel }
+          }, [
+            React.createElement('div', { className: 'flex items-center justify-between' }, [
+              React.createElement(FiCpu, { className: 'h-8 w-8', style: { color: C.blue } }),
+              React.createElement('span', { className: 'mono', style: { fontSize: 10, color: C.inkFaint, border: `1px solid ${C.line}`, borderRadius: 4, padding: '3px 8px' } }, p.sheet)
+            ]),
+            React.createElement('div', { className: 'mono', style: { marginTop: 18, fontSize: 11, color: C.inkFaint, letterSpacing: '0.04em' } }, p.context.toUpperCase()),
+            React.createElement('h3', { className: 'disp', style: { marginTop: 4, fontSize: 24, fontWeight: 700 } }, p.title),
+            React.createElement('p', { style: { marginTop: 12, fontSize: 14, lineHeight: 1.7, color: C.inkMute } }, p.description),
+            React.createElement('div', { style: { marginTop: 20, display: 'flex', flexWrap: 'wrap', gap: 8 } },
+              p.tags.map(t => React.createElement('span', {
+                key: t,
+                className: 'mono',
+                style: { borderRadius: 4, background: C.bgPanelSoft, border: `1px solid ${C.line}`, padding: '5px 10px', fontSize: 11, color: C.inkMute }
+              }, t))
+            )
+          ]))
+        )
+      ),
+      // Skills
+      React.createElement(Section, { id: 'skills', eyebrow: '04 — Toolbox', title: 'Skills & certifications', key: 'skills' },
+        React.createElement('div', { className: 'grid gap-6 md:grid-cols-3' }, [
+          React.createElement(SkillCard, { icon: React.createElement(FiTool, { className: 'h-5 w-5' }), title: 'Technical', key: 'tech' },
+            React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 8 } },
+              technicalSkills.map(s => React.createElement('span', {
+                key: s,
+                className: 'mono',
+                style: { borderRadius: 6, border: `1px solid ${C.line}`, background: C.bgPanelSoft, padding: '7px 12px', fontSize: 12, fontWeight: 500 }
+              }, s))
+            )
+          ),
+          React.createElement(SkillCard, { icon: React.createElement(FiAward, { className: 'h-5 w-5' }), title: 'Certifications', key: 'cert' },
+            React.createElement('ul', { className: 'space-y-3' },
+              certifications.map(c => React.createElement('li', {
+                key: c,
+                style: { display: 'flex', gap: 10, fontSize: 13, lineHeight: 1.6 }
+              }, [
+                React.createElement('span', { style: { color: C.cyan, marginTop: 1 } }, '✓'),
+                React.createElement('span', { style: { color: C.inkMute } }, c)
+              ]))
+            )
+          ),
+          React.createElement(SkillCard, { icon: React.createElement(FiUsers, { className: 'h-5 w-5' }), title: 'Soft skills', key: 'soft' },
+            React.createElement('ul', { className: 'space-y-3' },
+              softSkills.map(s => React.createElement('li', {
+                key: s,
+                style: { display: 'flex', gap: 10, fontSize: 13 }
+              }, [
+                React.createElement('span', { style: { color: C.blue } }, '◆'),
+                React.createElement('span', { style: { color: C.inkMute } }, s)
+              ]))
+            )
+          )
+        ])
+      ),
+      // Achievements + Leadership
+      React.createElement(Section, { id: 'achievements', eyebrow: 'Recognition', title: 'Achievements & leadership', key: 'achievements' },
+        React.createElement('div', { className: 'grid gap-6 md:grid-cols-2' }, [
+          React.createElement('div', { style: { border: `1px solid ${C.line}`, borderRadius: 6, padding: 28, background: C.bgPanel }, key: 'ach' }, [
+            React.createElement('div', { className: 'flex items-center gap-3', style: { marginBottom: 20 } }, [
+              React.createElement('div', {
+                style: {
+                  display: 'flex', height: 40, width: 40, alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: C.blue
+                }
+              }, React.createElement(FaTrophy, { className: 'h-5 w-5' })),
+              React.createElement('h3', { className: 'disp', style: { fontSize: 19, fontWeight: 700 } }, 'Achievements')
+            ]),
+            React.createElement('ul', { className: 'space-y-3' },
+              achievements.map(a => React.createElement('li', {
+                key: a,
+                style: { display: 'flex', gap: 12, fontSize: 13, color: C.inkMute, lineHeight: 1.6 }
+              }, [
+                React.createElement('span', { style: { color: C.cyan } }, '▹'),
+                React.createElement('span', null, a)
+              ]))
+            )
+          ]),
+          React.createElement('div', { style: { border: `1px solid ${C.line}`, borderRadius: 6, padding: 28, background: C.bgPanel }, key: 'lead' }, [
+            React.createElement('div', { className: 'flex items-center gap-3', style: { marginBottom: 20 } }, [
+              React.createElement('div', {
+                style: {
+                  display: 'flex', height: 40, width: 40, alignItems: 'center', justifyContent: 'center',
+                  borderRadius: 6, background: 'rgba(59,130,246,0.12)', color: C.blue
+                }
+              }, React.createElement(FiUsers, { className: 'h-5 w-5' })),
+              React.createElement('h3', { className: 'disp', style: { fontSize: 19, fontWeight: 700 } }, 'Leadership')
+            ]),
+            React.createElement('ul', { className: 'space-y-4' },
+              leadership.map(l => React.createElement('li', {
+                key: l.role + l.period,
+                style: { borderLeft: `2px solid ${C.blue}66`, paddingLeft: 14 }
+              }, [
+                React.createElement('div', { style: { fontSize: 13, fontWeight: 600 } }, l.role),
+                React.createElement('div', { style: { fontSize: 12, color: C.inkMute } }, l.org),
+                React.createElement('div', { className: 'mono', style: { marginTop: 2, fontSize: 11, color: C.cyan } }, l.period)
+              ]))
+            )
+          ])
+        ])
+      ),
+      // Contact
+      React.createElement('section', { id: 'contact', style: { position: 'relative', padding: '96px 0' }, key: 'contact' },
+        React.createElement('div', { className: 'relative mx-auto max-w-4xl px-6 text-center' }, [
+          React.createElement('div', { className: 'mono', style: { fontSize: 11, letterSpacing: '0.2em', color: C.blue } }, '05 — LET\'S CONNECT'),
+          React.createElement('h2', { className: 'disp', style: { marginTop: 16, fontSize: 'clamp(2rem, 5vw, 3.4rem)', fontWeight: 700, letterSpacing: '-0.01em' } }, [
+            'Ready to design and build for your ',
+            React.createElement('span', { className: 'accent-text' }, 'next project.')
+          ]),
+          React.createElement('p', { style: { margin: '16px auto 0', maxWidth: 520, fontSize: 15, color: C.inkMute, lineHeight: 1.7 } },
+            'Actively seeking internships and opportunities in design and manufacturing. Reach out — I\'d love to talk.'
+          ),
+          React.createElement('div', { style: { marginTop: 40, display: 'grid', gap: 16 }, className: 'md:grid-cols-3' }, [
+            React.createElement(ContactCard, { icon: React.createElement(FiMail, { className: 'h-5 w-5' }), label: 'Email', value: 'varunraj9721@gmail.com', href: 'mailto:varunraj9721@gmail.com', key: 'email' }),
+            React.createElement(ContactCard, { icon: React.createElement(FiPhone, { className: 'h-5 w-5' }), label: 'Phone', value: '+91 93448 77687', href: 'tel:+919344877687', key: 'phone' }),
+            React.createElement(ContactCard, { icon: React.createElement(FiMapPin, { className: 'h-5 w-5' }), label: 'Location', value: 'Kumbakonam, Tamil Nadu', key: 'location' })
+          ]),
+          React.createElement('a', {
+            href: '#',
+            className: 'mono',
+            style: { marginTop: 32, display: 'inline-flex', alignItems: 'center', gap: 8, color: C.blue, fontSize: 12 }
+          }, [React.createElement(FiLinkedin, { className: 'h-4 w-4' }), ' LINKEDIN PROFILE'])
+        ])
+      ),
+      // Footer
+      React.createElement('footer', {
+        style: { borderTop: `1px solid ${C.line}`, padding: '28px 0' },
+        key: 'footer'
+      }, React.createElement('div', {
+        className: 'mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-6 text-center md:flex-row md:text-left'
+      }, [
+        React.createElement('div', { className: 'mono', style: { fontSize: 11, color: C.inkFaint } }, '© 2026 VARUNRAJ V — ALL RIGHTS RESERVED'),
+        React.createElement('div', { className: 'mono', style: { fontSize: 11, color: C.inkFaint } }, 'MECHANICAL ENGINEERING · ACGCET KARAIKUDI')
+      ]))
+    ]);
+  };
+
+  // mount
+  const rootElement = document.getElementById('root');
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(React.createElement(Portfolio));
+</script>
+</body>
+</html>
