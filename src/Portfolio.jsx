@@ -717,7 +717,7 @@ export default function Portfolio() {
               {[
                 { k: "2", v: "Internships" },
                 { k: "8.42", v: "B.E. CGPA" },
-                { k: "100%", v: "SSLC score" },
+                { k: "83.5%", v: "HSC score" },
                 { k: "6", v: "CAD / CAE tools" },
               ].map((s) => (
                 <div
