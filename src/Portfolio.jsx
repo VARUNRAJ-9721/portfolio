@@ -622,7 +622,7 @@ export default function Portfolio() {
         </div>
 
         <a
-          href="#"
+          href="https://www.linkedin.com/in/varunraj-v-5263b02a6?utm_source=share_via&utm_content=profile&utm_medium=member_android"
           aria-label="LinkedIn profile"
           style={{
             position: "relative",
