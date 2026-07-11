@@ -757,7 +757,7 @@ export default function Portfolio() {
       </Section>
 
       {/* Experience Section */}
-      <Section id="experience" eyebrow="02 — Experience" title="Where I've worked">
+      <Section id="experience" eyebrow="02 — Experience" title="INTERNSHIP EXPERIENCE">
         <div className="space-y-6">
           {experiences.map((exp) => (
             <div
