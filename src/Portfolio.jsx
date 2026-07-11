@@ -562,7 +562,7 @@ export default function Portfolio() {
           {/* Left: photo */}
           <div className="hero-left">
             <div className="hero-image-wrap">
-              <img src="varun.jpeg" alt="Varunraj V" className="hero-image" />
+              <img src="./src/varun.png" alt="Varunraj V" className="hero-image" />
             </div>
           </div>
 
